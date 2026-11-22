@@ -1,0 +1,20 @@
+{
+  "fetchdate": 1795381762,
+  "error": null,
+  "station": {
+    "id": 2, "location": "Micheldorf", "country_iso": "AT", "londec": 14.131555555131701,
+    "latdec": 47.872505555682714, "elevation": 470, "weblink": "https://stationsweb.awekas.at/de/2",
+    "camlink": "http://awekassrv03.awekas.at/kunden/smbc/SMBC-Start.php",
+    "software": "AWEKAS Bridge Direct Link", "hardware": "Davis Vantage Pro 2 (Plus)",
+    "timezone": "Europe/Vienna", "AWEKASplus": 1
+  },
+  "stationsweb": {"enabled": 1, "period": "2030-12-11", "premium": 1, "weblink": "https://stationsweb.awekas.at/index.php?id=2"},
+  "sensorstatus": {
+    "temperature": 1, "humidity": 1, "airpressure": 1, "wind": 1, "precipitation": 1, "rainrate": 1,
+    "solar": 1, "uv": 1, "indoortemperature": 1, "indoorhumidity": 1,
+    "soiltemp1": 1, "soiltemp2": 1, "soiltemp3": 0, "soiltemp4": 0,
+    "soilmoisture1": 1, "soilmoisture2": 0, "soilmoisture3": 0, "soilmoisture4": 0,
+    "leafwetness1": 1, "leafwetness2": 0, "humidity1": 1, "humidity2": 0, "humidity3": 0, "humidity4": 0,
+    "airquality": 1
+  }
+}

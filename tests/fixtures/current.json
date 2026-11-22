@@ -1,0 +1,39 @@
+{
+  "fetchdate": 1795381759,
+  "error": null,
+  "current": {
+    "datatimestamp": 1795381680, "timeoffset": 3600, "conditiontimestamp": null, "condition": 0,
+    "temperature": 1.7, "dewpoint": -0.2, "windchill": 1.7, "wetbulbtemperature": 0.87, "humidity": 87,
+    "airpress_rel": 1010.5, "tendency": 2, "precipitation": 0, "rainrate": 0, "itsraining": false,
+    "windspeed": 0, "gustspeed": 0, "winddirection": 319, "uv": 0, "solar": 0, "brightness": null,
+    "suntime": 1.12, "snowheighttimestamp": null, "snowheight": null,
+    "temp1": 8.3, "temp2": 6.7, "temp3": null, "temp4": null,
+    "humidity1": null, "humidity2": null, "humidity3": null, "humidity4": null,
+    "soilmoisture1": 17, "soilmoisture2": null, "soilmoisture3": null, "soilmoisture4": null,
+    "leafwetness1": 0, "leafwetness2": null, "indoortemperature": 24.8, "indoorhumidity": 32,
+    "airquality_pm1": 13.7, "airquality_pm2": 18.8, "airquality_pm10": 18.8
+  },
+  "1h": {"precipitation_1h": 0},
+  "day": {
+    "temp_min": -0.8, "temp_min_ts": 1795338480, "temp_max": 3.2, "temp_max_ts": 1795302060,
+    "dewpoint_min": -1.8, "dewpoint_min_ts": 1795338480, "dewpoint_max": 2.1, "dewpoint_max_ts": 1795302060,
+    "hum_min": 84, "hum_min_ts": 1795352340, "hum_max": 94, "hum_max_ts": 1795345200,
+    "airp_rel_min": 1006.8, "airp_rel_min_ts": 1795357440, "airp_rel_max": 1017, "airp_rel_max_ts": 1795302000,
+    "windspeed_min": 0, "windspeed_min_ts": 1795307760, "windspeed_max": 13, "windspeed_max_ts": 1795315200,
+    "winddir_max": 146, "gustspeed_min": 0, "gustspeed_min_ts": 1795307760, "gustspeed_max": 24.1,
+    "gustspeed_max_ts": 1795314240, "gustdir_max": 146, "rainrate_max": 0, "rainrate_max_ts": 1795302000,
+    "precipitation_24h": 0, "brightness_max": null, "brightness_max_ts": null, "solar_max": 134,
+    "solar_max_ts": 1795345500, "uv_max": 0, "uv_max_ts": 1795302000, "intemp_min": 22.4,
+    "intemp_min_ts": 1795329000, "intemp_max": 25.6, "intemp_max_ts": 1795376520, "inhum_min": 32,
+    "inhum_min_ts": 1795302000, "inhum_max": 34, "inhum_max_ts": 1795349820,
+    "airquality_pm1": 8.5, "airquality_pm2": 11.6, "airquality_pm10": 12.1
+  },
+  "forecast": {
+    "day0": {"fc_code": 1183, "fc_icon": 296, "fc_text": "leichter Regen", "fc_temp_min": -0.59, "fc_temp_max": 4.08, "fc_rainsum": 0, "fc_rain_possibility": 63},
+    "day1": {"fc_code": 1255, "fc_icon": 368, "fc_text": "leichte Schneegestöber", "fc_temp_min": -2.1, "fc_temp_max": 0.27, "fc_rainsum": 0.5, "fc_rain_possibility": 54},
+    "day2": {"fc_code": 1000, "fc_icon": 113, "fc_text": "Sonnig", "fc_temp_min": -4.32, "fc_temp_max": 1.72, "fc_rainsum": 0, "fc_rain_possibility": 0},
+    "day3": {"fc_code": 1255, "fc_icon": 368, "fc_text": "leichte Schneegestöber", "fc_temp_min": -3.56, "fc_temp_max": 2.45, "fc_rainsum": 0.6, "fc_rain_possibility": 56},
+    "day4": {"fc_code": 1219, "fc_icon": 332, "fc_text": "Schneefall", "fc_temp_min": -2.18, "fc_temp_max": -0.11, "fc_rainsum": 4.2, "fc_rain_possibility": 82},
+    "day5": {"fc_code": 1255, "fc_icon": 368, "fc_text": "leichte Schneegestöber", "fc_temp_min": -3, "fc_temp_max": -0.75, "fc_rainsum": 0.5, "fc_rain_possibility": 51}
+  }
+}

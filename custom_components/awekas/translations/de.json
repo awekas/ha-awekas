@@ -1,0 +1,390 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "AWEKAS Wetterstation",
+        "description": "Gib den API-Key deiner AWEKAS Wetterstation ein. Du findest ihn in deinem Benutzerprofil unter {url}. Für die Stations-API ist ein aktives AWEKAS Plus nötig.",
+        "data": {
+          "api_key": "API-Key"
+        },
+        "data_description": {
+          "api_key": "Dein persönlicher AWEKAS API-Key. Er wird in Home Assistant gespeichert und nur an api.awekas.at gesendet."
+        }
+      },
+      "reauth_confirm": {
+        "title": "AWEKAS API-Key neu eingeben",
+        "description": "Der AWEKAS API-Key ist nicht mehr gültig oder AWEKAS Plus ist nicht aktiv. Bitte kopiere den aktuellen Key von {url}.",
+        "data": {
+          "api_key": "API-Key"
+        },
+        "data_description": {
+          "api_key": "Dein persönlicher AWEKAS API-Key. Er wird in Home Assistant gespeichert und nur an api.awekas.at gesendet."
+        }
+      }
+    },
+    "error": {
+      "invalid_key_format": "Der API-Key hat ein ungültiges Format.",
+      "invalid_key": "Ungültiger AWEKAS API-Key.",
+      "plus_inactive": "AWEKAS Plus ist nicht aktiv. Für die Stations-API ist AWEKAS Plus nötig.",
+      "quota_exceeded": "Das Abfragelimit der AWEKAS API ist überschritten. Bitte in 15 Minuten erneut versuchen.",
+      "cannot_connect": "Der AWEKAS-Server ist nicht erreichbar.",
+      "unknown": "Unerwarteter Fehler."
+    },
+    "abort": {
+      "already_configured": "Diese Wetterstation ist bereits eingerichtet.",
+      "reauth_successful": "Der API-Key wurde aktualisiert.",
+      "wrong_station": "Dieser API-Key gehört zu einer anderen Wetterstation."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "AWEKAS Optionen",
+        "data": {
+          "interval": "Abfrageintervall",
+          "language": "Sprache"
+        },
+        "data_description": {
+          "interval": "Sekunden zwischen zwei Abfragen (60 bis 3600).",
+          "language": "Sprache der Vorhersagetexte von AWEKAS."
+        }
+      }
+    }
+  },
+  "selector": {
+    "language": {
+      "options": {
+        "system": "Systemsprache",
+        "de": "Deutsch",
+        "en": "English",
+        "es": "Español",
+        "it": "Italiano",
+        "fr": "Français",
+        "nl": "Nederlands",
+        "pl": "Polski"
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "itsraining": {
+        "name": "Regen",
+        "state": {
+          "on": "Regen",
+          "off": "Trocken"
+        }
+      },
+      "awekasplus": {
+        "name": "AWEKAS Plus"
+      },
+      "stationsweb": {
+        "name": "Stationsweb"
+      }
+    },
+    "sensor": {
+      "temperature": {
+        "name": "Temperatur"
+      },
+      "dewpoint": {
+        "name": "Taupunkt"
+      },
+      "windchill": {
+        "name": "Windchill"
+      },
+      "wetbulbtemperature": {
+        "name": "Feuchtkugeltemperatur"
+      },
+      "humidity": {
+        "name": "Luftfeuchtigkeit"
+      },
+      "airpress_rel": {
+        "name": "Relativer Luftdruck"
+      },
+      "tendency": {
+        "name": "Luftdrucktendenz",
+        "state": {
+          "falling_fast": "Stark fallend",
+          "falling": "Fallend",
+          "steady": "Gleichbleibend",
+          "rising": "Steigend",
+          "rising_fast": "Stark steigend"
+        }
+      },
+      "precipitation": {
+        "name": "Niederschlag heute"
+      },
+      "precipitation_1h": {
+        "name": "Niederschlag letzte Stunde"
+      },
+      "rainrate": {
+        "name": "Regenrate"
+      },
+      "windspeed": {
+        "name": "Windgeschwindigkeit"
+      },
+      "gustspeed": {
+        "name": "Windböen"
+      },
+      "winddirection": {
+        "name": "Windrichtung"
+      },
+      "winddirection_text": {
+        "name": "Windrichtung (Himmelsrichtung)",
+        "state": {
+          "n": "N",
+          "nne": "NNO",
+          "ne": "NO",
+          "ene": "ONO",
+          "e": "O",
+          "ese": "OSO",
+          "se": "SO",
+          "sse": "SSO",
+          "s": "S",
+          "ssw": "SSW",
+          "sw": "SW",
+          "wsw": "WSW",
+          "w": "W",
+          "wnw": "WNW",
+          "nw": "NW",
+          "nnw": "NNW"
+        }
+      },
+      "uv": {
+        "name": "UV-Index"
+      },
+      "solar": {
+        "name": "Sonneneinstrahlung"
+      },
+      "brightness": {
+        "name": "Helligkeit"
+      },
+      "suntime": {
+        "name": "Sonnenscheindauer heute"
+      },
+      "snowheight": {
+        "name": "Schneehöhe"
+      },
+      "indoortemperature": {
+        "name": "Innentemperatur"
+      },
+      "indoorhumidity": {
+        "name": "Innenluftfeuchtigkeit"
+      },
+      "airquality_pm1": {
+        "name": "Feinstaub PM1"
+      },
+      "airquality_pm2": {
+        "name": "Feinstaub PM2,5"
+      },
+      "airquality_pm10": {
+        "name": "Feinstaub PM10"
+      },
+      "datatimestamp": {
+        "name": "Letzte Messung"
+      },
+      "fetchdate": {
+        "name": "Letzter Datenabruf"
+      },
+      "stationsweb_period": {
+        "name": "Stationsweb gültig bis"
+      },
+      "temp1": {
+        "name": "Bodentemperatur 1"
+      },
+      "humidity1": {
+        "name": "Zusätzliche Luftfeuchtigkeit 1"
+      },
+      "soilmoisture1": {
+        "name": "Bodenfeuchte 1"
+      },
+      "temp2": {
+        "name": "Bodentemperatur 2"
+      },
+      "humidity2": {
+        "name": "Zusätzliche Luftfeuchtigkeit 2"
+      },
+      "soilmoisture2": {
+        "name": "Bodenfeuchte 2"
+      },
+      "temp3": {
+        "name": "Bodentemperatur 3"
+      },
+      "humidity3": {
+        "name": "Zusätzliche Luftfeuchtigkeit 3"
+      },
+      "soilmoisture3": {
+        "name": "Bodenfeuchte 3"
+      },
+      "temp4": {
+        "name": "Bodentemperatur 4"
+      },
+      "humidity4": {
+        "name": "Zusätzliche Luftfeuchtigkeit 4"
+      },
+      "soilmoisture4": {
+        "name": "Bodenfeuchte 4"
+      },
+      "leafwetness1": {
+        "name": "Blattnässe 1"
+      },
+      "leafwetness2": {
+        "name": "Blattnässe 2"
+      },
+      "day_temp_min": {
+        "name": "Temperatur Minimum heute"
+      },
+      "day_temp_min_ts": {
+        "name": "Temperatur Minimum heute (Zeitpunkt)"
+      },
+      "day_temp_max": {
+        "name": "Temperatur Maximum heute"
+      },
+      "day_temp_max_ts": {
+        "name": "Temperatur Maximum heute (Zeitpunkt)"
+      },
+      "day_dewpoint_min": {
+        "name": "Taupunkt Minimum heute"
+      },
+      "day_dewpoint_min_ts": {
+        "name": "Taupunkt Minimum heute (Zeitpunkt)"
+      },
+      "day_dewpoint_max": {
+        "name": "Taupunkt Maximum heute"
+      },
+      "day_dewpoint_max_ts": {
+        "name": "Taupunkt Maximum heute (Zeitpunkt)"
+      },
+      "day_hum_min": {
+        "name": "Luftfeuchtigkeit Minimum heute"
+      },
+      "day_hum_min_ts": {
+        "name": "Luftfeuchtigkeit Minimum heute (Zeitpunkt)"
+      },
+      "day_hum_max": {
+        "name": "Luftfeuchtigkeit Maximum heute"
+      },
+      "day_hum_max_ts": {
+        "name": "Luftfeuchtigkeit Maximum heute (Zeitpunkt)"
+      },
+      "day_airp_rel_min": {
+        "name": "Luftdruck Minimum heute"
+      },
+      "day_airp_rel_min_ts": {
+        "name": "Luftdruck Minimum heute (Zeitpunkt)"
+      },
+      "day_airp_rel_max": {
+        "name": "Luftdruck Maximum heute"
+      },
+      "day_airp_rel_max_ts": {
+        "name": "Luftdruck Maximum heute (Zeitpunkt)"
+      },
+      "day_windspeed_min": {
+        "name": "Windgeschwindigkeit Minimum heute"
+      },
+      "day_windspeed_min_ts": {
+        "name": "Windgeschwindigkeit Minimum heute (Zeitpunkt)"
+      },
+      "day_windspeed_max": {
+        "name": "Windgeschwindigkeit Maximum heute"
+      },
+      "day_windspeed_max_ts": {
+        "name": "Windgeschwindigkeit Maximum heute (Zeitpunkt)"
+      },
+      "day_gustspeed_min": {
+        "name": "Windböen Minimum heute"
+      },
+      "day_gustspeed_min_ts": {
+        "name": "Windböen Minimum heute (Zeitpunkt)"
+      },
+      "day_gustspeed_max": {
+        "name": "Windböen Maximum heute"
+      },
+      "day_gustspeed_max_ts": {
+        "name": "Windböen Maximum heute (Zeitpunkt)"
+      },
+      "day_intemp_min": {
+        "name": "Innentemperatur Minimum heute"
+      },
+      "day_intemp_min_ts": {
+        "name": "Innentemperatur Minimum heute (Zeitpunkt)"
+      },
+      "day_intemp_max": {
+        "name": "Innentemperatur Maximum heute"
+      },
+      "day_intemp_max_ts": {
+        "name": "Innentemperatur Maximum heute (Zeitpunkt)"
+      },
+      "day_inhum_min": {
+        "name": "Innenluftfeuchtigkeit Minimum heute"
+      },
+      "day_inhum_min_ts": {
+        "name": "Innenluftfeuchtigkeit Minimum heute (Zeitpunkt)"
+      },
+      "day_inhum_max": {
+        "name": "Innenluftfeuchtigkeit Maximum heute"
+      },
+      "day_inhum_max_ts": {
+        "name": "Innenluftfeuchtigkeit Maximum heute (Zeitpunkt)"
+      },
+      "day_rainrate_max": {
+        "name": "Max. Regenrate heute"
+      },
+      "day_rainrate_max_ts": {
+        "name": "Max. Regenrate heute (Zeitpunkt)"
+      },
+      "day_brightness_max": {
+        "name": "Max. Helligkeit heute"
+      },
+      "day_brightness_max_ts": {
+        "name": "Max. Helligkeit heute (Zeitpunkt)"
+      },
+      "day_solar_max": {
+        "name": "Max. Sonneneinstrahlung heute"
+      },
+      "day_solar_max_ts": {
+        "name": "Max. Sonneneinstrahlung heute (Zeitpunkt)"
+      },
+      "day_uv_max": {
+        "name": "Max. UV-Index heute"
+      },
+      "day_uv_max_ts": {
+        "name": "Max. UV-Index heute (Zeitpunkt)"
+      },
+      "day_precipitation_24h": {
+        "name": "Niederschlag letzte 24 h"
+      },
+      "day_winddir_max": {
+        "name": "Richtung des stärksten Windes heute"
+      },
+      "day_gustdir_max": {
+        "name": "Richtung der stärksten Böe heute"
+      },
+      "day_airquality_pm1": {
+        "name": "Feinstaub PM1 heute"
+      },
+      "day_airquality_pm2": {
+        "name": "Feinstaub PM2,5 heute"
+      },
+      "day_airquality_pm10": {
+        "name": "Feinstaub PM10 heute"
+      }
+    }
+  },
+  "exceptions": {
+    "invalid_key": {
+      "message": "Ungültiger AWEKAS API-Key. Bitte den Key neu eingeben."
+    },
+    "plus_inactive": {
+      "message": "AWEKAS Plus ist nicht aktiv. Bitte im AWEKAS-Benutzerprofil aktivieren."
+    },
+    "quota_exceeded": {
+      "message": "Abfragelimit der AWEKAS API überschritten, warte 15 Minuten."
+    },
+    "cannot_connect": {
+      "message": "AWEKAS-Server nicht erreichbar ({error}). Nächster Versuch in {minutes} min."
+    },
+    "api_error": {
+      "message": "Die AWEKAS API meldet einen Fehler: {error}"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "entity": {
+    "binary_sensor": {
+      "itsraining": {
+        "default": "mdi:weather-partly-cloudy",
+        "state": {
+          "on": "mdi:weather-pouring"
+        }
+      },
+      "awekasplus": {
+        "default": "mdi:star-circle-outline"
+      },
+      "stationsweb": {
+        "default": "mdi:web"
+      }
+    },
+    "sensor": {
+      "tendency": {
+        "default": "mdi:gauge",
+        "state": {
+          "falling_fast": "mdi:arrow-down-bold",
+          "falling": "mdi:arrow-bottom-right",
+          "steady": "mdi:arrow-right",
+          "rising": "mdi:arrow-top-right",
+          "rising_fast": "mdi:arrow-up-bold"
+        }
+      },
+      "winddirection_text": { "default": "mdi:compass-outline" },
+      "uv": { "default": "mdi:weather-sunny-alert" },
+      "day_uv_max": { "default": "mdi:weather-sunny-alert" },
+      "suntime": { "default": "mdi:weather-sunny" },
+      "soilmoisture1": { "default": "mdi:water-percent" },
+      "soilmoisture2": { "default": "mdi:water-percent" },
+      "soilmoisture3": { "default": "mdi:water-percent" },
+      "soilmoisture4": { "default": "mdi:water-percent" },
+      "leafwetness1": { "default": "mdi:leaf" },
+      "leafwetness2": { "default": "mdi:leaf" },
+      "snowheight": { "default": "mdi:snowflake" },
+      "stationsweb_period": { "default": "mdi:calendar-check" }
+    }
+  }
+}

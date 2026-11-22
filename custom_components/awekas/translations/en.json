@@ -1,0 +1,390 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "AWEKAS weather station",
+        "description": "Enter the API key of your AWEKAS weather station. You find it in your user profile at {url}. The Stations API requires an active AWEKAS Plus.",
+        "data": {
+          "api_key": "API key"
+        },
+        "data_description": {
+          "api_key": "Your personal AWEKAS API key. It is stored in Home Assistant and only sent to api.awekas.at."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Re-enter AWEKAS API key",
+        "description": "The AWEKAS API key is no longer valid or AWEKAS Plus is not active. Please copy the current key from {url}.",
+        "data": {
+          "api_key": "API key"
+        },
+        "data_description": {
+          "api_key": "Your personal AWEKAS API key. It is stored in Home Assistant and only sent to api.awekas.at."
+        }
+      }
+    },
+    "error": {
+      "invalid_key_format": "The API key has an invalid format.",
+      "invalid_key": "Invalid AWEKAS API key.",
+      "plus_inactive": "AWEKAS Plus is not active. AWEKAS Plus is required for the Stations API.",
+      "quota_exceeded": "The AWEKAS API quota is exceeded. Please try again in 15 minutes.",
+      "cannot_connect": "The AWEKAS server cannot be reached.",
+      "unknown": "Unexpected error."
+    },
+    "abort": {
+      "already_configured": "This weather station is already configured.",
+      "reauth_successful": "The API key was updated.",
+      "wrong_station": "This API key belongs to a different weather station."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "AWEKAS options",
+        "data": {
+          "interval": "Request interval",
+          "language": "Language"
+        },
+        "data_description": {
+          "interval": "Seconds between two requests (60 to 3600).",
+          "language": "Language of the forecast texts from AWEKAS."
+        }
+      }
+    }
+  },
+  "selector": {
+    "language": {
+      "options": {
+        "system": "System language",
+        "de": "Deutsch",
+        "en": "English",
+        "es": "Español",
+        "it": "Italiano",
+        "fr": "Français",
+        "nl": "Nederlands",
+        "pl": "Polski"
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "itsraining": {
+        "name": "Raining",
+        "state": {
+          "on": "Raining",
+          "off": "Dry"
+        }
+      },
+      "awekasplus": {
+        "name": "AWEKAS Plus"
+      },
+      "stationsweb": {
+        "name": "Stationsweb"
+      }
+    },
+    "sensor": {
+      "temperature": {
+        "name": "Temperature"
+      },
+      "dewpoint": {
+        "name": "Dew point"
+      },
+      "windchill": {
+        "name": "Wind chill"
+      },
+      "wetbulbtemperature": {
+        "name": "Wet-bulb temperature"
+      },
+      "humidity": {
+        "name": "Humidity"
+      },
+      "airpress_rel": {
+        "name": "Relative air pressure"
+      },
+      "tendency": {
+        "name": "Pressure tendency",
+        "state": {
+          "falling_fast": "Falling fast",
+          "falling": "Falling",
+          "steady": "Steady",
+          "rising": "Rising",
+          "rising_fast": "Rising fast"
+        }
+      },
+      "precipitation": {
+        "name": "Precipitation today"
+      },
+      "precipitation_1h": {
+        "name": "Precipitation last hour"
+      },
+      "rainrate": {
+        "name": "Rain rate"
+      },
+      "windspeed": {
+        "name": "Wind speed"
+      },
+      "gustspeed": {
+        "name": "Gust speed"
+      },
+      "winddirection": {
+        "name": "Wind direction"
+      },
+      "winddirection_text": {
+        "name": "Wind direction (compass)",
+        "state": {
+          "n": "N",
+          "nne": "NNE",
+          "ne": "NE",
+          "ene": "ENE",
+          "e": "E",
+          "ese": "ESE",
+          "se": "SE",
+          "sse": "SSE",
+          "s": "S",
+          "ssw": "SSW",
+          "sw": "SW",
+          "wsw": "WSW",
+          "w": "W",
+          "wnw": "WNW",
+          "nw": "NW",
+          "nnw": "NNW"
+        }
+      },
+      "uv": {
+        "name": "UV index"
+      },
+      "solar": {
+        "name": "Solar radiation"
+      },
+      "brightness": {
+        "name": "Brightness"
+      },
+      "suntime": {
+        "name": "Sunshine duration today"
+      },
+      "snowheight": {
+        "name": "Snow height"
+      },
+      "indoortemperature": {
+        "name": "Indoor temperature"
+      },
+      "indoorhumidity": {
+        "name": "Indoor humidity"
+      },
+      "airquality_pm1": {
+        "name": "PM1"
+      },
+      "airquality_pm2": {
+        "name": "PM2.5"
+      },
+      "airquality_pm10": {
+        "name": "PM10"
+      },
+      "datatimestamp": {
+        "name": "Last measurement"
+      },
+      "fetchdate": {
+        "name": "Last data fetch"
+      },
+      "stationsweb_period": {
+        "name": "Stationsweb valid until"
+      },
+      "temp1": {
+        "name": "Soil temperature 1"
+      },
+      "humidity1": {
+        "name": "Extra humidity 1"
+      },
+      "soilmoisture1": {
+        "name": "Soil moisture 1"
+      },
+      "temp2": {
+        "name": "Soil temperature 2"
+      },
+      "humidity2": {
+        "name": "Extra humidity 2"
+      },
+      "soilmoisture2": {
+        "name": "Soil moisture 2"
+      },
+      "temp3": {
+        "name": "Soil temperature 3"
+      },
+      "humidity3": {
+        "name": "Extra humidity 3"
+      },
+      "soilmoisture3": {
+        "name": "Soil moisture 3"
+      },
+      "temp4": {
+        "name": "Soil temperature 4"
+      },
+      "humidity4": {
+        "name": "Extra humidity 4"
+      },
+      "soilmoisture4": {
+        "name": "Soil moisture 4"
+      },
+      "leafwetness1": {
+        "name": "Leaf wetness 1"
+      },
+      "leafwetness2": {
+        "name": "Leaf wetness 2"
+      },
+      "day_temp_min": {
+        "name": "Temperature min today"
+      },
+      "day_temp_min_ts": {
+        "name": "Temperature min today (time)"
+      },
+      "day_temp_max": {
+        "name": "Temperature max today"
+      },
+      "day_temp_max_ts": {
+        "name": "Temperature max today (time)"
+      },
+      "day_dewpoint_min": {
+        "name": "Dew point min today"
+      },
+      "day_dewpoint_min_ts": {
+        "name": "Dew point min today (time)"
+      },
+      "day_dewpoint_max": {
+        "name": "Dew point max today"
+      },
+      "day_dewpoint_max_ts": {
+        "name": "Dew point max today (time)"
+      },
+      "day_hum_min": {
+        "name": "Humidity min today"
+      },
+      "day_hum_min_ts": {
+        "name": "Humidity min today (time)"
+      },
+      "day_hum_max": {
+        "name": "Humidity max today"
+      },
+      "day_hum_max_ts": {
+        "name": "Humidity max today (time)"
+      },
+      "day_airp_rel_min": {
+        "name": "Air pressure min today"
+      },
+      "day_airp_rel_min_ts": {
+        "name": "Air pressure min today (time)"
+      },
+      "day_airp_rel_max": {
+        "name": "Air pressure max today"
+      },
+      "day_airp_rel_max_ts": {
+        "name": "Air pressure max today (time)"
+      },
+      "day_windspeed_min": {
+        "name": "Wind speed min today"
+      },
+      "day_windspeed_min_ts": {
+        "name": "Wind speed min today (time)"
+      },
+      "day_windspeed_max": {
+        "name": "Wind speed max today"
+      },
+      "day_windspeed_max_ts": {
+        "name": "Wind speed max today (time)"
+      },
+      "day_gustspeed_min": {
+        "name": "Gust speed min today"
+      },
+      "day_gustspeed_min_ts": {
+        "name": "Gust speed min today (time)"
+      },
+      "day_gustspeed_max": {
+        "name": "Gust speed max today"
+      },
+      "day_gustspeed_max_ts": {
+        "name": "Gust speed max today (time)"
+      },
+      "day_intemp_min": {
+        "name": "Indoor temperature min today"
+      },
+      "day_intemp_min_ts": {
+        "name": "Indoor temperature min today (time)"
+      },
+      "day_intemp_max": {
+        "name": "Indoor temperature max today"
+      },
+      "day_intemp_max_ts": {
+        "name": "Indoor temperature max today (time)"
+      },
+      "day_inhum_min": {
+        "name": "Indoor humidity min today"
+      },
+      "day_inhum_min_ts": {
+        "name": "Indoor humidity min today (time)"
+      },
+      "day_inhum_max": {
+        "name": "Indoor humidity max today"
+      },
+      "day_inhum_max_ts": {
+        "name": "Indoor humidity max today (time)"
+      },
+      "day_rainrate_max": {
+        "name": "Max rain rate today"
+      },
+      "day_rainrate_max_ts": {
+        "name": "Max rain rate today (time)"
+      },
+      "day_brightness_max": {
+        "name": "Max brightness today"
+      },
+      "day_brightness_max_ts": {
+        "name": "Max brightness today (time)"
+      },
+      "day_solar_max": {
+        "name": "Max solar radiation today"
+      },
+      "day_solar_max_ts": {
+        "name": "Max solar radiation today (time)"
+      },
+      "day_uv_max": {
+        "name": "Max UV index today"
+      },
+      "day_uv_max_ts": {
+        "name": "Max UV index today (time)"
+      },
+      "day_precipitation_24h": {
+        "name": "Precipitation last 24 h"
+      },
+      "day_winddir_max": {
+        "name": "Direction of max wind today"
+      },
+      "day_gustdir_max": {
+        "name": "Direction of max gust today"
+      },
+      "day_airquality_pm1": {
+        "name": "PM1 today"
+      },
+      "day_airquality_pm2": {
+        "name": "PM2.5 today"
+      },
+      "day_airquality_pm10": {
+        "name": "PM10 today"
+      }
+    }
+  },
+  "exceptions": {
+    "invalid_key": {
+      "message": "Invalid AWEKAS API key. Please re-enter the key."
+    },
+    "plus_inactive": {
+      "message": "AWEKAS Plus is not active. Please activate it in your AWEKAS user profile."
+    },
+    "quota_exceeded": {
+      "message": "AWEKAS API quota exceeded, waiting 15 minutes."
+    },
+    "cannot_connect": {
+      "message": "AWEKAS server not reachable ({error}). Next try in {minutes} min."
+    },
+    "api_error": {
+      "message": "The AWEKAS API reported an error: {error}"
+    }
+  }
+}
