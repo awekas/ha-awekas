@@ -1,7 +1,12 @@
 {
   "domain": "awekas",
   "name": "AWEKAS",
-  "codeowners": ["@awekas"],
+  "categories": [
+    "weather_alerts"
+  ],
+  "codeowners": [
+    "@awekas"
+  ],
   "config_flow": true,
   "documentation": "https://github.com/awekas/ha-awekas",
   "integration_type": "device",
