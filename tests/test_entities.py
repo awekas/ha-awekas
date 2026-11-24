@@ -10,6 +10,8 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers import entity_registry as er
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
+from custom_components.awekas.api import AwekasConnectionError
+
 from .conftest import load_fixture
 
 
@@ -90,20 +92,40 @@ async def test_new_sensor_is_added(
     assert float(hass.states.get(entity_id).state) == 55
 
 
-async def test_stale_sensor_is_removed(
+async def test_registered_sensor_is_kept(
     hass: HomeAssistant, mock_client: MagicMock, mock_config_entry: MockConfigEntry
 ) -> None:
-    """A sensor the station no longer delivers is removed when the integration starts."""
+    """A sensor that existed before is kept (unknown) while its value is null."""
     mock_config_entry.add_to_hass(hass)
     registry = er.async_get(hass)
     registry.async_get_or_create(
         "sensor", "awekas", "2_humidity1", config_entry=mock_config_entry
     )
-    assert _entity_id(hass, "sensor", "humidity1")
 
     await hass.config_entries.async_setup(mock_config_entry.entry_id)
     await hass.async_block_till_done()
-    assert _entity_id(hass, "sensor", "humidity1") is None
+    entity_id = _entity_id(hass, "sensor", "humidity1")
+    assert entity_id
+    assert hass.states.get(entity_id).state == "unknown"
+
+
+async def test_station_entities_survive_failed_station_request(
+    hass: HomeAssistant, mock_client: MagicMock, mock_config_entry: MockConfigEntry
+) -> None:
+    """station.php failing during startup does not remove the station entities."""
+    await _setup(hass, mock_config_entry)
+    entity_id = _entity_id(hass, "binary_sensor", "awekasplus")
+    assert hass.states.get(entity_id).state == "on"
+    registry_id = er.async_get(hass).async_get(entity_id).id
+
+    await hass.config_entries.async_unload(mock_config_entry.entry_id)
+    mock_client.async_get_station.side_effect = AwekasConnectionError("HTTP 503")
+    await hass.config_entries.async_setup(mock_config_entry.entry_id)
+    await hass.async_block_till_done()
+
+    # same registry entry (entity ID, name, area, history kept), value unknown for now
+    assert er.async_get(hass).async_get(entity_id).id == registry_id
+    assert hass.states.get(entity_id).state == "unknown"
 
 
 async def test_timestamp_sensors_disabled_by_default(

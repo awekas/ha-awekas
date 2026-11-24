@@ -35,7 +35,7 @@ from homeassistant.helpers.typing import StateType
 
 from . import AwekasConfigEntry
 from .coordinator import AwekasCoordinator, AwekasData
-from .entity import AwekasEntity, async_remove_stale_entities
+from .entity import AwekasEntity, async_registered_keys
 from .util import (
     PRESSURE_TENDENCY,
     WIND_DIRECTIONS,
@@ -309,11 +309,12 @@ async def async_setup_entry(
 ) -> None:
     """Set up AWEKAS sensors.
 
-    Only sensors with a value are created. Sensors that start delivering values
-    later are added automatically; sensors that are no longer delivered are
-    removed when the integration starts.
+    A sensor is created as soon as the station delivers a value for it (null =
+    the station has no such sensor). Once created it stays: while its value is
+    null it shows unknown. Entities are never removed by the integration.
     """
     coordinator = entry.runtime_data
+    registered = async_registered_keys(hass, entry, "sensor")
     created: set[str] = set()
 
     @callback
@@ -321,16 +322,14 @@ async def async_setup_entry(
         new = [
             description
             for description in SENSORS
-            if description.key not in created and should_create(description, coordinator.data)
+            if description.key not in created
+            and (description.key in registered or should_create(description, coordinator.data))
         ]
         if new:
             created.update(description.key for description in new)
             async_add_entities([AwekasSensor(coordinator, description) for description in new])
 
     _async_add_new()
-    async_remove_stale_entities(
-        hass, entry, "sensor", {description.key for description in SENSORS} - created
-    )
     entry.async_on_unload(coordinator.async_add_listener(_async_add_new))
 
 

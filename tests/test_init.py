@@ -127,3 +127,24 @@ async def test_diagnostics_without_key(
     assert TEST_KEY not in text
     assert "47.8725" not in text
     assert diagnostics["current"]["current"]["temperature"] == 1.7
+
+
+async def test_station_retry_after_failure(
+    hass: HomeAssistant, mock_client: MagicMock, mock_config_entry: MockConfigEntry
+) -> None:
+    """A failed station request is not repeated on every poll."""
+    mock_client.async_get_station.side_effect = AwekasConnectionError("HTTP 503")
+    await _setup(hass, mock_config_entry)
+    assert mock_config_entry.state is ConfigEntryState.LOADED
+    assert mock_client.async_get_station.call_count == 1
+
+    await mock_config_entry.runtime_data.async_refresh()
+    assert mock_client.async_get_station.call_count == 1  # next try only after 15 minutes
+
+
+async def test_time_zone_resolved_in_coordinator(
+    hass: HomeAssistant, mock_client: MagicMock, mock_config_entry: MockConfigEntry
+) -> None:
+    """The station time zone is resolved once by the coordinator."""
+    await _setup(hass, mock_config_entry)
+    assert str(mock_config_entry.runtime_data.time_zone) == "Europe/Vienna"

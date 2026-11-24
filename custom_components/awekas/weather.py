@@ -23,7 +23,7 @@ from homeassistant.util import dt as dt_util
 from . import AwekasConfigEntry
 from .const import ATTRIBUTION
 from .coordinator import AwekasCoordinator
-from .util import current_condition, forecast_condition, to_float, to_int, to_text
+from .util import current_condition, forecast_condition, to_float, to_int
 
 PARALLEL_UPDATES = 0
 FORECAST_DAYS = 6
@@ -127,9 +127,7 @@ class AwekasWeather(SingleCoordinatorWeatherEntity[AwekasCoordinator]):
         forecast = self.coordinator.data.section("forecast")
         if not forecast:
             return None
-        tz = dt_util.get_time_zone(
-            to_text(self.coordinator.data.section("station").get("timezone")) or ""
-        ) or dt_util.get_default_time_zone()
+        tz = self.coordinator.time_zone or dt_util.get_default_time_zone()
         today = dt_util.now(tz).date()
 
         result: list[Forecast] = []

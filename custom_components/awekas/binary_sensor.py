@@ -14,7 +14,7 @@ from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 
 from . import AwekasConfigEntry
 from .coordinator import AwekasCoordinator
-from .entity import AwekasEntity, async_remove_stale_entities
+from .entity import AwekasEntity, async_registered_keys
 from .util import to_bool
 
 PARALLEL_UPDATES = 0
@@ -59,6 +59,7 @@ async def async_setup_entry(
 ) -> None:
     """Set up AWEKAS binary sensors (only those with a value, see sensor.py)."""
     coordinator = entry.runtime_data
+    registered = async_registered_keys(hass, entry, "binary_sensor")
     created: set[str] = set()
 
     @callback
@@ -67,16 +68,16 @@ async def async_setup_entry(
             description
             for description in BINARY_SENSORS
             if description.key not in created
-            and coordinator.data.section(description.section).get(description.field) is not None
+            and (
+                description.key in registered
+                or coordinator.data.section(description.section).get(description.field) is not None
+            )
         ]
         if new:
             created.update(description.key for description in new)
             async_add_entities([AwekasBinarySensor(coordinator, description) for description in new])
 
     _async_add_new()
-    async_remove_stale_entities(
-        hass, entry, "binary_sensor", {d.key for d in BINARY_SENSORS} - created
-    )
     entry.async_on_unload(coordinator.async_add_listener(_async_add_new))
 
 

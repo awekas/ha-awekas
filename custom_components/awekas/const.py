@@ -34,6 +34,7 @@ BACKOFF_START: Final = 5 * 60  # seconds
 BACKOFF_MAX: Final = 60 * 60
 QUOTA_WAIT: Final = 15 * 60
 STATION_REFRESH: Final = 24 * 60 * 60  # station data rarely changes
+STATION_RETRY: Final = 15 * 60  # after a failed station request
 STATION_REQUEST_DELAY: Final = 1.5  # AWEKAS allows max. 2 requests per second
 
 SUPPORTED_LANGUAGES: Final = ["de", "en", "es", "it", "fr", "nl", "pl"]

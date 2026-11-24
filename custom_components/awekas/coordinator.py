@@ -16,7 +16,7 @@ import asyncio
 import random
 import time
 from dataclasses import dataclass
-from datetime import timedelta
+from datetime import timedelta, tzinfo
 from typing import TYPE_CHECKING, Any
 
 from homeassistant.const import CONF_API_KEY
@@ -24,6 +24,7 @@ from homeassistant.exceptions import ConfigEntryAuthFailed
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
+from homeassistant.util import dt as dt_util
 
 from .api import (
     AwekasApiError,
@@ -48,6 +49,7 @@ from .const import (
     QUOTA_WAIT,
     STATION_REFRESH,
     STATION_REQUEST_DELAY,
+    STATION_RETRY,
     SUPPORTED_LANGUAGES,
 )
 from .util import to_text
@@ -114,7 +116,9 @@ class AwekasCoordinator(DataUpdateCoordinator[AwekasData]):
         )
         self._backoff = 0.0
         self._station: dict[str, Any] | None = None
-        self._station_fetched = 0.0
+        self._station_next = 0.0  # monotonic time of the next station.php request
+        # time zone of the station, resolved once without blocking the event loop
+        self.time_zone: tzinfo | None = None
 
     @property
     def language(self) -> str:
@@ -164,19 +168,26 @@ class AwekasCoordinator(DataUpdateCoordinator[AwekasData]):
         self._backoff = 0.0
         self.update_interval = with_jitter(self._interval)
 
-        if self._station is None or time.monotonic() - self._station_fetched > STATION_REFRESH:
+        if time.monotonic() >= self._station_next:
             await self._async_update_station()
 
         return AwekasData(current=current, station=self._station)
 
     async def _async_update_station(self) -> None:
         """Station data is optional: errors are only logged."""
-        self._station_fetched = time.monotonic()
         await asyncio.sleep(STATION_REQUEST_DELAY)
         try:
             self._station = await self.client.async_get_station()
         except AwekasError as err:
-            LOGGER.debug("Could not read station data: %s", err)
+            # keep the last station data; entities show it or unknown, none are removed
+            LOGGER.debug("Could not read station data, retrying in 15 minutes: %s", err)
+            self._station_next = time.monotonic() + STATION_RETRY
+            return
+        self._station_next = time.monotonic() + STATION_REFRESH
+        station = self._station.get("station")
+        name = to_text(station.get("timezone")) if isinstance(station, dict) else None
+        # async_get_time_zone loads the zone without blocking the event loop
+        self.time_zone = await dt_util.async_get_time_zone(name) if name else None
 
     def _next_backoff(self) -> timedelta:
         self._backoff = min(self._backoff * 2, BACKOFF_MAX) if self._backoff else BACKOFF_START
