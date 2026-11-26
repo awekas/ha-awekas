@@ -11,7 +11,7 @@ It reads the data of your own weather station from the AWEKAS Stations API.
 ## Requirements
 
 - Home Assistant 2026.2 or newer (the AWEKAS icon is shown from 2026.3)
-- a weather station registered at AWEKAS with active **AWEKAS Plus** (required for the Stations API)
+- a weather station registered at AWEKAS and its API key (the Stations API is available for every registered station)
 - for the forecast: an active AWEKAS **Stationsweb** subscription
 
 ## Installation
@@ -23,14 +23,14 @@ The button opens the AWEKAS repository directly in your own Home Assistant. With
 ### Marketplace (Home Assistant 2026.11 and newer)
 
 1. **Settings → Marketplace**.
-2. Select **Add from link** (upper right), enter `awekas/ha-awekas` and select **Add**.
-   As soon as AWEKAS is part of the default catalog, you can simply search for **AWEKAS** instead.
-3. Open **AWEKAS** and install it. If Home Assistant asks for a restart, restart it via **Settings → System → Repairs**.
+2. Search for **AWEKAS** and install it.
+3. If Home Assistant asks for a restart, restart it via **Settings → System → Repairs**.
 
 ### HACS (Home Assistant 2026.10 and older)
 
-1. **HACS** → three-dot menu → **Custom repositories** → add `https://github.com/awekas/ha-awekas`, type **Integration**.
-2. Search for **AWEKAS** in HACS, download it and restart Home Assistant.
+1. Open **HACS** in the sidebar.
+2. Search for **AWEKAS** and select **Download**.
+3. Restart Home Assistant.
 
 ### Manual
 
@@ -48,7 +48,7 @@ Options (**Configure** on the integration card):
 | Request interval | Seconds between two requests. Minimum 60 s, default 60 s. |
 | Language | Language of the forecast texts. Default: Home Assistant system language (de, en, es, it, fr, nl, pl; otherwise English). |
 
-If the key becomes invalid or AWEKAS Plus expires, the integration stops querying and Home Assistant asks you to enter a new key.
+If the key becomes invalid, the integration stops querying and Home Assistant asks you to enter a new key.
 
 ## Entities
 
@@ -74,7 +74,7 @@ The AWEKAS Stations API allows 240 requests per hour and 2 requests per second. 
 - station data is read only once a day
 - on connection or server errors the interval is increased step by step (5, 10, 20, 40, max. 60 min)
 - if the quota is exceeded the integration waits 15 minutes; a `Retry-After` header is respected
-- with an invalid key or inactive AWEKAS Plus the integration stops querying until a new key is entered
+- with an invalid key the integration stops querying until a new key is entered
 
 ## Privacy and security
 
