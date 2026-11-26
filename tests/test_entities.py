@@ -59,7 +59,8 @@ async def test_sensors(
 
 
     assert hass.states.get(_entity_id(hass, "binary_sensor", "itsraining")).state == "off"
-    assert hass.states.get(_entity_id(hass, "binary_sensor", "awekasplus")).state == "on"
+    assert hass.states.get(_entity_id(hass, "binary_sensor", "stationsweb")).state == "on"
+    assert _entity_id(hass, "binary_sensor", "awekasplus") is None
 
 
 async def test_only_existing_sensors(
@@ -114,7 +115,7 @@ async def test_station_entities_survive_failed_station_request(
 ) -> None:
     """station.php failing during startup does not remove the station entities."""
     await _setup(hass, mock_config_entry)
-    entity_id = _entity_id(hass, "binary_sensor", "awekasplus")
+    entity_id = _entity_id(hass, "binary_sensor", "stationsweb")
     assert hass.states.get(entity_id).state == "on"
     registry_id = er.async_get(hass).async_get(entity_id).id
 

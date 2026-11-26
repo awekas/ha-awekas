@@ -56,7 +56,7 @@ If the key becomes invalid, the integration stops querying and Home Assistant as
 |---|---|
 | Weather | current conditions and the daily forecast for today and the next five days (see below) |
 | Sensors | temperature, dew point, wind chill, humidity, pressure and tendency, wind, gusts, rain, rain rate, solar radiation, UV, sunshine duration, soil temperature and moisture, leaf wetness, indoor values, air quality, daily minimum/maximum values |
-| Binary sensors | raining, AWEKAS Plus active, Stationsweb active |
+| Binary sensors | raining, Stationsweb active |
 | Diagnostics | time of the last measurement, Stationsweb valid until |
 
 The current condition of the weather entity is taken from the condition reported by the station. If the station reports none, precipitation measured by the station is shown (rain, or snow at about 0 °C and below); otherwise today's forecast is used, with forecast precipitation shown as "cloudy" while the station measures none.
@@ -89,6 +89,10 @@ Please report problems as an [issue](https://github.com/awekas/ha-awekas/issues)
 It contains the raw data of your station, but neither your API key nor the exact position.
 
 ## Changelog
+
+### 0.1.2 (2026-11-26)
+
+- AWEKAS Plus has been discontinued; the Stations API is available for every registered station. The binary sensor "AWEKAS Plus" and all references to AWEKAS Plus were removed. An existing "AWEKAS Plus" entity can be deleted under Settings → Entities.
 
 ### 0.1.1 (2026-11-24)
 

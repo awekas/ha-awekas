@@ -6,8 +6,8 @@ Protection of the AWEKAS servers:
    do not hit the API at the same second
  - exponential back-off on network/server errors (5, 10, 20, 40, max. 60 min),
    Retry-After is honoured, 15 minutes pause when the quota is exceeded
- - polling stops completely on permanent errors (invalid key, AWEKAS Plus not
-   active) and Home Assistant asks the user to re-enter the key
+ - polling stops completely on a permanent error (invalid key) and Home
+   Assistant asks the user to re-enter the key
 """
 
 from __future__ import annotations

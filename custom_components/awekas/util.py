@@ -20,7 +20,6 @@ KEY_PATTERN = re.compile(r"^[A-Za-z0-9+/=_-]{8,256}$")
 # errors after which polling is stopped until the user enters a new key
 PERMANENT_ERRORS: dict[str, str] = {
     "invalid key": "invalid_key",
-    "awekas plus not active": "plus_inactive",
 }
 
 WIND_DIRECTIONS = [

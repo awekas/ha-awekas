@@ -3,7 +3,7 @@
     "step": {
       "user": {
         "title": "AWEKAS weather station",
-        "description": "Enter the API key of your AWEKAS weather station. You find it in your user profile at {url}. The Stations API requires an active AWEKAS Plus.",
+        "description": "Enter the API key of your AWEKAS weather station. You find it in your user profile at {url}.",
         "data": {
           "api_key": "API key"
         },
@@ -13,7 +13,7 @@
       },
       "reauth_confirm": {
         "title": "Re-enter AWEKAS API key",
-        "description": "The AWEKAS API key is no longer valid or AWEKAS Plus is not active. Please copy the current key from {url}.",
+        "description": "The AWEKAS API key is no longer valid. Please copy the current key from {url}.",
         "data": {
           "api_key": "API key"
         },
@@ -25,7 +25,6 @@
     "error": {
       "invalid_key_format": "The API key has an invalid format.",
       "invalid_key": "Invalid AWEKAS API key.",
-      "plus_inactive": "AWEKAS Plus is not active. AWEKAS Plus is required for the Stations API.",
       "quota_exceeded": "The AWEKAS API quota is exceeded. Please try again in 15 minutes.",
       "cannot_connect": "The AWEKAS server cannot be reached.",
       "unknown": "Unexpected error."
@@ -73,9 +72,6 @@
           "on": "Raining",
           "off": "Dry"
         }
-      },
-      "awekasplus": {
-        "name": "AWEKAS Plus"
       },
       "stationsweb": {
         "name": "Stationsweb"
@@ -373,9 +369,6 @@
   "exceptions": {
     "invalid_key": {
       "message": "Invalid AWEKAS API key. Please re-enter the key."
-    },
-    "plus_inactive": {
-      "message": "AWEKAS Plus is not active. Please activate it in your AWEKAS user profile."
     },
     "quota_exceeded": {
       "message": "AWEKAS API quota exceeded, waiting 15 minutes."

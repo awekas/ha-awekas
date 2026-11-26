@@ -114,7 +114,7 @@ class AwekasConfigFlow(ConfigFlow, domain=DOMAIN):
         )
 
     async def async_step_reauth(self, entry_data: Mapping[str, Any]) -> ConfigFlowResult:
-        """Start re-authentication (invalid key or AWEKAS Plus not active)."""
+        """Start re-authentication (invalid key)."""
         return await self.async_step_reauth_confirm()
 
     async def async_step_reauth_confirm(

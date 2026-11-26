@@ -52,7 +52,6 @@ async def test_invalid_key_format(hass: HomeAssistant, mock_client: MagicMock) -
     ("side_effect", "error"),
     [
         (AwekasAuthError("invalid key", "invalid_key"), "invalid_key"),
-        (AwekasAuthError("AWEKAS Plus not active", "plus_inactive"), "plus_inactive"),
         (AwekasQuotaError("quota exceeded"), "quota_exceeded"),
         (AwekasConnectionError("HTTP 503"), "cannot_connect"),
         (RuntimeError("boom"), "unknown"),

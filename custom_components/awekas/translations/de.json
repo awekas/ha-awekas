@@ -3,7 +3,7 @@
     "step": {
       "user": {
         "title": "AWEKAS Wetterstation",
-        "description": "Gib den API-Key deiner AWEKAS Wetterstation ein. Du findest ihn in deinem Benutzerprofil unter {url}. Für die Stations-API ist ein aktives AWEKAS Plus nötig.",
+        "description": "Gib den API-Key deiner AWEKAS Wetterstation ein. Du findest ihn in deinem Benutzerprofil unter {url}.",
         "data": {
           "api_key": "API-Key"
         },
@@ -13,7 +13,7 @@
       },
       "reauth_confirm": {
         "title": "AWEKAS API-Key neu eingeben",
-        "description": "Der AWEKAS API-Key ist nicht mehr gültig oder AWEKAS Plus ist nicht aktiv. Bitte kopiere den aktuellen Key von {url}.",
+        "description": "Der AWEKAS API-Key ist nicht mehr gültig. Bitte kopiere den aktuellen Key von {url}.",
         "data": {
           "api_key": "API-Key"
         },
@@ -25,7 +25,6 @@
     "error": {
       "invalid_key_format": "Der API-Key hat ein ungültiges Format.",
       "invalid_key": "Ungültiger AWEKAS API-Key.",
-      "plus_inactive": "AWEKAS Plus ist nicht aktiv. Für die Stations-API ist AWEKAS Plus nötig.",
       "quota_exceeded": "Das Abfragelimit der AWEKAS API ist überschritten. Bitte in 15 Minuten erneut versuchen.",
       "cannot_connect": "Der AWEKAS-Server ist nicht erreichbar.",
       "unknown": "Unerwarteter Fehler."
@@ -73,9 +72,6 @@
           "on": "Regen",
           "off": "Trocken"
         }
-      },
-      "awekasplus": {
-        "name": "AWEKAS Plus"
       },
       "stationsweb": {
         "name": "Stationsweb"
@@ -373,9 +369,6 @@
   "exceptions": {
     "invalid_key": {
       "message": "Ungültiger AWEKAS API-Key. Bitte den Key neu eingeben."
-    },
-    "plus_inactive": {
-      "message": "AWEKAS Plus ist nicht aktiv. Bitte im AWEKAS-Benutzerprofil aktivieren."
     },
     "quota_exceeded": {
       "message": "Abfragelimit der AWEKAS API überschritten, warte 15 Minuten."

@@ -29,7 +29,7 @@ class AwekasError(Exception):
 
 
 class AwekasAuthError(AwekasError):
-    """Permanent error: invalid key or AWEKAS Plus not active."""
+    """Permanent error: invalid key."""
 
     def __init__(self, message: str, reason: str) -> None:
         """Initialize."""

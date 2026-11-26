@@ -36,13 +36,6 @@ BINARY_SENSORS: list[AwekasBinarySensorEntityDescription] = [
         field="itsraining",
     ),
     AwekasBinarySensorEntityDescription(
-        key="awekasplus",
-        translation_key="awekasplus",
-        entity_category=EntityCategory.DIAGNOSTIC,
-        section="station",
-        field="AWEKASplus",
-    ),
-    AwekasBinarySensorEntityDescription(
         key="stationsweb",
         translation_key="stationsweb",
         entity_category=EntityCategory.DIAGNOSTIC,

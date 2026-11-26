@@ -78,10 +78,10 @@ async def test_auth_error_starts_reauth(
 async def test_auth_error_while_running(
     hass: HomeAssistant, mock_client: MagicMock, mock_config_entry: MockConfigEntry
 ) -> None:
-    """AWEKAS Plus expiring while running stops polling and asks for a new key."""
+    """A key becoming invalid while running stops polling and asks for a new key."""
     await _setup(hass, mock_config_entry)
     mock_client.async_get_current.side_effect = AwekasAuthError(
-        "AWEKAS Plus not active", "plus_inactive"
+        "invalid key", "invalid_key"
     )
     await mock_config_entry.runtime_data.async_refresh()
     await hass.async_block_till_done()
